@@ -37,6 +37,19 @@ public class FuncoesVetor {
                 vetor[k++] =  matriz[i][j];
     }
     
+    //copiar apenas um lado da matriz para um novo vetor 
+    public static void copiarMatriz ( Rota[][] matriz, Rota [][] copia)
+    {
+        if(copia.length >= matriz.length)
+        {
+            int k = 0;
+            for(int i = 0; i < matriz.length; i++)
+                for(int j = 0; j < matriz.length; j++)
+                    copia[i][j] =  matriz[i][j];
+        }
+        else {System.err.print("Nao ha espaco suficiente na copia.");}
+    }
+    
     public static void iniciarVetor(Rota[] vetor)
     {
         for(int i = 0; i < vetor.length; i++)
