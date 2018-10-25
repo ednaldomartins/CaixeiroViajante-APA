@@ -9,5 +9,5 @@ import model.Rota;
  ******************************************************************************/
 public interface Heuristica 
 {
-    void solucionarPCV(Rota [][] grafo, Rota [][] grafoSCV);
+    void solucionarPCV(Rota [][] grafo, Rota [] vetorSCV);
 }
