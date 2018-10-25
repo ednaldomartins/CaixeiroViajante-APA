@@ -26,6 +26,7 @@ public class Rota
         this.selecionada = selecionada;
     }
 
+    //GETs
     public int getId() {
         return id;
     }
@@ -46,6 +47,8 @@ public class Rota
         return selecionada;
     }
 
+    
+    //SETs
     public void setId(int id) {
         this.id = id;
     }
@@ -65,9 +68,5 @@ public class Rota
     public void setSelecionada(boolean selecionada) {
         this.selecionada = selecionada;
     }
-    
-    
-    
-    
     
 }
