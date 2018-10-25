@@ -46,11 +46,11 @@ public class Arquivo
             FuncoesVetor.iniciarMatriz(matriz);
             for(int i = 0, id = 0; (line = reader.readLine()) != null; i++) 
             {   
-                String[] parametro = line.split(" ");
-                for(int j = i+1, k = 0; k < parametro.length; k++, j++, id++)
+                String[] parametro = line.split(" |\t");
+                for(int j = 0, k = 0; k < parametro.length; k++, j++, id++)
                 {
                     matriz[i][j] =  new Rota( id, i, j, Long.parseLong(parametro[k]), false);
-                    matriz[j][i] =  new Rota( id, j, i, Long.parseLong(parametro[k]), false);
+                    //matriz[j][i] =  new Rota( id, j, i, Long.parseLong(parametro[k]), false);
                 }
             }
             reader.close();         
