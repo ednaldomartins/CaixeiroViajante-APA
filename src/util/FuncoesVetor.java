@@ -47,7 +47,7 @@ public class FuncoesVetor {
                 for(int j = 0; j < matriz.length; j++)
                     copia[i][j] =  matriz[i][j];
         }
-        else {System.err.print("Nao ha espaco suficiente na copia.");}
+        else {System.err.println("Nao ha espaco suficiente na copia.");}
     }
     
     public static void iniciarVetor(Rota[] vetor)
@@ -56,11 +56,17 @@ public class FuncoesVetor {
             vetor[i] = new Rota( Long.MAX_VALUE, false );
     }
     
+    public static void iniciarVetor(int[] vetor) 
+    {
+        for(int i = 0; i < vetor.length; i++)
+            vetor[i] = 0;
+    }
+    
     public static void iniciarMatriz(Rota[][] matriz)
     {
         for(int i = 0; i < matriz.length; i++)
             for(int j = 0; j < matriz.length; j++)
-                matriz[i][j] =  new Rota( -1,-1,-1,-1, false );
+                matriz[i][j] =  new Rota( -1, -1, -1, 0, false );
     }
 
     public static int tamanhoLadoMatriz (Rota [][] matriz)
