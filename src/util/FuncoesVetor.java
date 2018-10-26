@@ -59,6 +59,12 @@ public class FuncoesVetor {
     public static void iniciarVetor(int[] vetor) 
     {
         for(int i = 0; i < vetor.length; i++)
+            vetor[i] = -1;
+    }
+    
+    public static void iniciarVetor(long[] vetor) 
+    {
+        for(int i = 0; i < vetor.length; i++)
             vetor[i] = 0;
     }
     
@@ -67,6 +73,13 @@ public class FuncoesVetor {
         for(int i = 0; i < matriz.length; i++)
             for(int j = 0; j < matriz.length; j++)
                 matriz[i][j] =  new Rota( -1, -1, -1, 0, false );
+    }
+    
+    public static void iniciarMatriz(long[][] matriz)
+    {
+        for(int i = 0; i < matriz.length; i++)
+            for(int j = 0; j < matriz.length; j++)
+                matriz[i][j] = 0;
     }
 
     public static int tamanhoLadoMatriz (Rota [][] matriz)
