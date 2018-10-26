@@ -35,7 +35,7 @@ public class Arquivo
      * @return grafo                                                           *
      * @throws IOException                                                     *
      **************************************************************************/
-    public Rota [][] carregarMatrizMST() throws IOException 
+    public Rota [][] carregarMatrizRotaPCV() throws IOException 
     {
         Rota [][] matriz = null;
         try (BufferedReader reader = Files.newBufferedReader(loadPath, utf8))
@@ -52,6 +52,31 @@ public class Arquivo
                     matriz[i][j] =  new Rota( id, i, j, Long.parseLong(parametro[k]), false);
                     //matriz[j][i] =  new Rota( id, j, i, Long.parseLong(parametro[k]), false);
                 }
+            }
+            reader.close();         
+        }
+        catch(FileNotFoundException ex) {System.err.println("Arquivo não encontrado");}
+        catch(NumberFormatException ex) {System.err.println("Erro de formato de numeros");}
+        catch(IOException ex) {System.err.println("Erro de leitura");}
+            
+        return matriz;
+    }
+    
+    
+    public long [][] carregarMatrizLongPCV() throws IOException 
+    {
+        long [][] matriz = null;
+        try (BufferedReader reader = Files.newBufferedReader(loadPath, utf8))
+        {
+            String line = null;
+            int tamanhoMatriz = Integer.parseInt( reader.readLine() );
+            matriz = new long[tamanhoMatriz][tamanhoMatriz];
+            FuncoesVetor.iniciarMatriz(matriz);
+            for(int i = 0, id = 0; (line = reader.readLine()) != null; i++) 
+            {   
+                String[] parametro = line.split(" |\t");
+                for(int j = 0, k = 0; k < parametro.length; k++, j++, id++)
+                    matriz[i][j] =  Long.parseLong(parametro[k]);
             }
             reader.close();         
         }
