@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.Rota;
 import infra.Arquivo;
 import util.FuncoesVetor;
 import util.Heuristica;
@@ -17,27 +16,27 @@ import util.Print;
  ******************************************************************************/
 public class ControllerPCV 
 {
-    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv177.txt";
-    private final Rota[][] matrizRota;
-    private Rota [] vetorSCV;
+    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv10.txt";
+    private final long[][] matriz;
+    private int [] vetorSCV;
 
     public ControllerPCV() 
     {
-        this.matrizRota = carregarMatrizArquivo();
+        this.matriz = carregarMatrizArquivo();
     }
     
     public void controlePCV (Heuristica heuristica)
     {
-        vetorSCV = new Rota[matrizRota.length];
+        vetorSCV = new int[matriz.length+1];
         FuncoesVetor.iniciarVetor(vetorSCV);
-        heuristica.solucionarPCV(matrizRota, vetorSCV);
+        heuristica.solucionarPCV(matriz, vetorSCV);
     }
     
     //Arquivo
-    private Rota[][] carregarMatrizArquivo() 
+    private long[][] carregarMatrizArquivo() 
     {
         try {
-            return new Arquivo(ARQUIVO_ORIGEM).carregarMatrizMST();
+            return new Arquivo(ARQUIVO_ORIGEM).carregarMatrizLongPCV();
         } catch (IOException ex) { Logger.getLogger(ControllerPCV.class.getName()).log(Level.SEVERE, null, ex); }
         return null;
     }    
@@ -45,7 +44,7 @@ public class ControllerPCV
     //Prints
     public void printMatrizPCV ()
     {
-        Print.printMatriz(matrizRota);
+        Print.printMatriz(matriz);
     }
     
     public void printVetorSCV ()
@@ -55,6 +54,6 @@ public class ControllerPCV
     
     public void printResultadoSCV ()
     {
-        Print.printResultado(vetorSCV);
+        Print.printResultado(matriz, vetorSCV);
     }
 }
