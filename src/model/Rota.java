@@ -7,66 +7,72 @@ package model;
  ******************************************************************************/
 public class Rota 
 {
-    private int id;
-    private int cidade1;
-    private int cidade2;
-    private long distancia;
-    private boolean selecionada;
-
-    public Rota(int id, int cidade1, int cidade2, long distancia, boolean selecionada) 
-    {
-        this(distancia, selecionada);
-        this.id = id;
-        this.cidade1 = cidade1;
-        this.cidade2 = cidade2;
-    }
-
-    public Rota(long distancia, boolean selecionada) {
-        this.distancia = distancia;
-        this.selecionada = selecionada;
-    }
-
-    //GETs
-    public int getId() {
-        return id;
-    }
-
-    public int getCidade1() {
-        return cidade1;
-    }
-
-    public int getCidade2() {
-        return cidade2;
-    }
-
-    public long getDistancia() {
-        return distancia;
-    }
-
-    public boolean isSelecionada() {
-        return selecionada;
-    }
-
+    /**
+     * melhorRota: guarda a posicao da melhor rota na matriz de solucoes
+     * ultimaSolucao: guarda a posicao da ultima solucao na matriz de solucoes
+     * melhorResultado: guarda o valor do calculo da melhor rota
+     * solucoes: matriz de solucoes
+     */
+    private int melhorRota;         
+    private int ultimaSolucao;  
+    private long melhorResultado;    
+    private int [][] solucoes;
     
+    public Rota(int numCidades)
+    {
+        this.melhorRota = -1;
+        this.ultimaSolucao = -1;
+        this.melhorResultado = Long.MAX_VALUE;
+        this.solucoes = new int [numCidades+1][numCidades+1];
+    }
+
+    public void addSolucao(int [] solucao)
+    {
+        this.ultimaSolucao++;
+        for(int i = 0; i < solucao.length; i++)
+            solucoes[ultimaSolucao][i] = solucao[i];
+    }
+
+    public int [] getMelhorRota() {
+        int [] vetor = new int [solucoes[0].length];
+        for(int i = 0; i < vetor.length; i++)
+            vetor[i] = solucoes[melhorRota][i];
+        return vetor;
+    }
+    
+    //GETs 
+    public int getNumMelhorRota() {
+        return melhorRota;
+    }
+
+    public int[][] getSolucoes() {
+        return solucoes;
+    }
+
+    public int getUltimaSolucao() {
+        return ultimaSolucao;
+    }
+    
+    public long getResultado() {
+        return melhorResultado;
+    }
+    
+
     //SETs
-    public void setId(int id) {
-        this.id = id;
+    public void setMelhorRota(int melhorRota) {
+        this.melhorRota = melhorRota;
     }
 
-    public void setCidade1(int cidade1) {
-        this.cidade1 = cidade1;
+    public void setUltimaSolucao(int ultimaSolucao) {
+        this.ultimaSolucao = ultimaSolucao;
     }
 
-    public void setCidade2(int cidade2) {
-        this.cidade2 = cidade2;
+    public void setResultado(long resultado) {
+        this.melhorResultado = resultado;
     }
 
-    public void setDistancia(long distancia) {
-        this.distancia = distancia;
-    }
-
-    public void setSelecionada(boolean selecionada) {
-        this.selecionada = selecionada;
+    public void setSolucoes(int[][] solucoes) {
+        this.solucoes = solucoes;
     }
     
 }
