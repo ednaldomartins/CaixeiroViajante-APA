@@ -3,6 +3,7 @@ package caixeiro.viajante;
 
 import controller.ControllerPCV;
 import model.HeuristicaVMP;
+import model.VND;
 
 
 /*******************************************************************************
@@ -18,9 +19,11 @@ public class CaixeiroViajante {
         //print da matriz de origem
         control.printMatrizPCV();
         //geracao da solucao para o PCV com base na heuristica usada
-        control.controlePCV( new HeuristicaVMP() );
-        //print do calculo
+        control.controlePCV( new HeuristicaVMP(), new VND() );
+        //print da primeira solucao
         control.printResultadoSCV();
+        //print da melhor solucao apos refinamento
+        control.printMelhorResultado();
     }
     
 }
