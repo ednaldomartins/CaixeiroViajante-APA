@@ -15,7 +15,8 @@ public class Rota
      */
     private int melhorRota;         
     private int ultimaSolucao;  
-    private long melhorResultado;    
+    private long melhorResultado; 
+    private int [] melhorSolucao;
     private int [][] solucoes;
     
     public Rota(int numCidades)
@@ -23,7 +24,8 @@ public class Rota
         this.melhorRota = -1;
         this.ultimaSolucao = -1;
         this.melhorResultado = Long.MAX_VALUE;
-        this.solucoes = new int [numCidades+1][numCidades+1];
+        this.melhorSolucao = new int [numCidades+1];
+        this.solucoes = new int [(numCidades-1)*(numCidades-1)/2][numCidades+1];
     }
 
     public void addSolucao(int [] solucao)
@@ -56,6 +58,11 @@ public class Rota
     public long getResultado() {
         return melhorResultado;
     }
+
+    public int[] getMelhorSolucao() {
+        return melhorSolucao;
+    }
+    
     
 
     //SETs
@@ -71,6 +78,10 @@ public class Rota
         this.melhorResultado = resultado;
     }
 
+    public void setMelhorSolucao(int[] melhorSolucao) {
+        this.melhorSolucao = melhorSolucao;
+    }
+    
     public void setSolucoes(int[][] solucoes) {
         this.solucoes = solucoes;
     }
