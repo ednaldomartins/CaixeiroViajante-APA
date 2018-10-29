@@ -21,16 +21,13 @@ public class VND implements RefinamentoPCV
     {
         r.setResultado(calcularResultado(grafo, rota));
         int [] novaRota = new int[rota.length];
+        FuncoesVetor.copiarVetor(rota, novaRota);
         for(int i = 1, j = rota.length-1; i < j; i++, j--)
         {
-            FuncoesVetor.copiarVetor(rota, novaRota);
             this.exchange(novaRota, i, j-1);
-            //rota = ( this.buildMelhorSolucao(r, grafo, novaRota) )  ? novaRota : rota;
             this.buildMelhorSolucao(r, grafo, rota, novaRota);
             this.insert(novaRota, i, j-1);
             this.buildMelhorSolucao(r, grafo, rota, novaRota);
-            //rota = ( this.buildMelhorSolucao(r, grafo, novaRota) )  ? novaRota : rota;
-            //r.setResultado( resultado  <  r.getResultado() ? resultado : r.getResultado() );
         }
     }
     
