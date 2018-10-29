@@ -13,6 +13,7 @@ public class VND implements RefinamentoPCV
     /**
      * VND: Variable Neighborhood Descent
      * DVV: Descida em Vizinhança Variavel
+     * @param r
      * @param grafo
      * @param rota
      */
@@ -21,13 +22,29 @@ public class VND implements RefinamentoPCV
     {
         r.setResultado(calcularResultado(grafo, rota));
         int [] novaRota = new int[rota.length];
-        FuncoesVetor.copiarVetor(rota, novaRota);
-        for(int i = 1, j = rota.length-1; i < j; i++, j--)
+        //FuncoesVetor.copiarVetor(rota, novaRota);
+        twoOPT(r, grafo, rota, novaRota);
+    }
+    
+    /**
+     * Metodo de Descida 2-opt
+     * O elemento i deve ir da posicao inicial dele, descendo ate o fim do vetor
+     * na posicao n-1, depois o elemento i+1, e assim por diante.
+     * @param r
+     * @param grafo
+     * @param rota
+     * @param novaRota 
+     */
+    private void twoOPT(Rota r, long [][] grafo, int [] rota, int [] novaRota)
+    {
+        for(int i = 1; i < rota.length; i++)
         {
-            this.exchange(novaRota, i, j-1);
-            this.buildMelhorSolucao(r, grafo, rota, novaRota);
-            this.insert(novaRota, i, j-1);
-            this.buildMelhorSolucao(r, grafo, rota, novaRota);
+            FuncoesVetor.copiarVetor(rota, novaRota);
+            for(int j = i+1; j < rota.length-1; j++)
+            {
+                exchange(novaRota, j-1, j);
+                buildMelhorSolucao(r, grafo, rota, novaRota);
+            }
         }
     }
     
@@ -39,10 +56,8 @@ public class VND implements RefinamentoPCV
         {
             r.setResultado(resultado);
             r.setMelhorRota(r.getUltimaSolucao());
-            rota = novaRota;
+            r.setMelhorSolucao(novaRota);
         }
-        else 
-            novaRota = rota;
     }
     
     private void exchange ( int [] list, int i, int j )
