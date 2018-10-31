@@ -1,13 +1,13 @@
 
 package model;
 
-import util.Heuristica;
+import util.HeuristicaConstrutiva;
 
 /*******************************************************************************
  * @author Ednaldo                                                             *
  *  date 24.10.2018                                                            *
  ******************************************************************************/
-public class HeuristicaVMP implements Heuristica
+public class HeuristicaVMP implements HeuristicaConstrutiva
 {
     int contRotas[];
     int inicio;
@@ -19,12 +19,13 @@ public class HeuristicaVMP implements Heuristica
     @Override
     public void solucionarPCV(long[][] grafo, int[] vetorSCV)
     {
-        //contador de rotas por cidade
+        //contador de rotas por cidade e ponto de partida
         contRotas = new int[grafo.length];
-        //ponto de partida escolhido
-        int inicio = 0, cidadeAtual = inicio, proximaCidade = -1, n = 0;
+        inicio = 0;
+        int cidadeAtual = inicio, proximaCidade = -1, n = 0;
         vetorSCV[0] = inicio;
         contRotas[inicio]++;
+        //enquanto o ponto inicial nao for igual ao final:
         while(!isHamiltoniano(vetorSCV)) 
         {
             long menor = Long.MAX_VALUE;
@@ -58,6 +59,6 @@ public class HeuristicaVMP implements Heuristica
     //contador simplificado usando vetor
     private boolean isHamiltoniano( int [] vetor)
     {
-        return !(vetor[vetor.length-1] != vetor[0]);
+        return (vetor[vetor.length-1] == vetor[0]);
     }
 }
