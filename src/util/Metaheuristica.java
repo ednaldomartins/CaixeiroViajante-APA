@@ -5,9 +5,9 @@ import model.Rota;
 
 /*******************************************************************************
  * @author Ednaldo                                                             *
- *  date 24.10.2018                                                            *
+ *  date: 30.10.2018                                                           *
  ******************************************************************************/
-public interface Heuristica 
+public interface Metaheuristica 
 {
-    void solucionarPCV(long [][] grafo, int [] vetorSCV);
+    public void explorar(Rota r, long[][] grafo, int[] rota);
 }
