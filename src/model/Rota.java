@@ -66,7 +66,7 @@ public class Rota
     
 
     //SETs
-    public void setMelhorRota(int melhorRota) {
+    public void setNumMelhorRota(int melhorRota) {
         this.melhorRota = melhorRota;
     }
 
