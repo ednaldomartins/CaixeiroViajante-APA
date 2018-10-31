@@ -25,7 +25,7 @@ public class Rota
         this.ultimaSolucao = -1;
         this.melhorResultado = Long.MAX_VALUE;
         this.melhorSolucao = new int [numCidades+1];
-        this.solucoes = new int [(numCidades-1)*(numCidades-1)/2][numCidades+1];
+        this.solucoes = new int [(numCidades-1)*(numCidades-1)][numCidades+1];
     }
 
     public void addSolucao(int [] solucao)
