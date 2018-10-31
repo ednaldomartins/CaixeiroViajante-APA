@@ -8,9 +8,10 @@ import java.util.logging.Logger;
 import infra.Arquivo;
 import model.Rota;
 import util.FuncoesVetor;
-import util.Heuristica;
 import util.Print;
-import util.RefinamentoPCV;
+import util.HeuristicaRefinamento;
+import util.HeuristicaConstrutiva;
+import util.Metaheuristica;
 
 /*******************************************************************************
  * @author Ednaldo                                                             *
@@ -18,7 +19,7 @@ import util.RefinamentoPCV;
  ******************************************************************************/
 public class ControllerPCV 
 {
-    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv50.txt";
+    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv5_15.txt";
     private final long[][] matriz;
     private Rota rota;          //Objeto Rota guarda varias informacoes sobre rotas
     private int [] vetorSCV;    //primeira solucao
@@ -29,7 +30,7 @@ public class ControllerPCV
         this.rota = new Rota(matriz.length);
     }
     
-    public void controlePCV (Heuristica heuristica, RefinamentoPCV refinamento)
+    public void controlePCV (HeuristicaConstrutiva heuristica, HeuristicaRefinamento refinamento)
     {
         vetorSCV = new int[matriz.length+1];
         FuncoesVetor.iniciarVetor(vetorSCV);
@@ -39,6 +40,11 @@ public class ControllerPCV
         refinamento.refinar(rota, matriz, vetorSCV);
     }
     
+    public void controlePCV (HeuristicaConstrutiva heuristica, HeuristicaRefinamento refinamento, Metaheuristica metaheuristica)
+    {
+        this.controlePCV(heuristica, refinamento);
+        metaheuristica.explorar(rota, matriz, vetorSCV);
+    }
     
     //Arquivo
     private long[][] carregarMatrizArquivo() 
