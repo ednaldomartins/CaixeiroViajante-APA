@@ -19,7 +19,7 @@ import util.Metaheuristica;
  ******************************************************************************/
 public class ControllerPCV 
 {
-    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv3_10.txt";
+    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv9_177.txt";
     private final long[][] matriz;
     private Rota rota;          //Objeto Rota guarda varias informacoes sobre rotas
     private int [] vetorSCV;    //primeira solucao
@@ -73,6 +73,6 @@ public class ControllerPCV
     
     public void printMelhorResultado()
     {
-        Print.printResultado(matriz, rota.getMelhorRota());
+        Print.printResultado(matriz, rota.getSolucao( rota.getNumMelhorRota() ));
     }
 }

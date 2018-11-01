@@ -11,6 +11,7 @@ public class Rota
      * melhorRota: guarda a posicao da melhor rota na matriz de solucoes
      * ultimaSolucao: guarda a posicao da ultima solucao na matriz de solucoes
      * melhorResultado: guarda o valor do calculo da melhor rota
+     * melhorSolucao: guarda sequencia de cidades de melhor solucao
      * solucoes: matriz de solucoes
      */
     private int melhorRota;         
@@ -25,7 +26,7 @@ public class Rota
         this.ultimaSolucao = -1;
         this.melhorResultado = Long.MAX_VALUE;
         this.melhorSolucao = new int [numCidades+1];
-        this.solucoes = new int [(numCidades-1)*(numCidades-1)][numCidades+1];
+        this.solucoes = new int [(numCidades)*2][numCidades+1];
     }
 
     public void addSolucao(int [] solucao)
@@ -47,15 +48,15 @@ public class Rota
         return melhorRota;
     }
 
-    public int[][] getSolucoes() {
-        return solucoes;
+    public int[] getSolucao(int i) {
+        return solucoes[i];
     }
 
     public int getUltimaSolucao() {
         return ultimaSolucao;
     }
     
-    public long getResultado() {
+    public long getMelhorResultado() {
         return melhorResultado;
     }
 
@@ -74,7 +75,7 @@ public class Rota
         this.ultimaSolucao = ultimaSolucao;
     }
 
-    public void setResultado(long resultado) {
+    public void setMelhorResultado(long resultado) {
         this.melhorResultado = resultado;
     }
 
