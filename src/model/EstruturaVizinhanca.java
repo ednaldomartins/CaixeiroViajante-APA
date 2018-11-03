@@ -5,8 +5,11 @@ package model;
  * @author Ednaldo                                                             *
  *  date: 30.10.2018                                                           *
  ******************************************************************************/
-public class VariableNeighborhood 
+public abstract class EstruturaVizinhanca 
 {
+    //STATE
+    public abstract EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] rota, int[] novaRota, int[] melhorRota);
+            
     protected void buildMelhorSolucao(Rota r, long [][] grafo, int [] melhorRota, long resultado)
     {
         r.addSolucao(melhorRota);
@@ -15,25 +18,6 @@ public class VariableNeighborhood
         r.setMelhorSolucao(melhorRota);
     }
     
-    protected void exchange ( int [] list, int i, int j )
-    {
-        int temp = list[j];
-        list[j] = list[i];
-        list[i] = temp;
-    }
-    
-    protected void insert (int [] list, int i, int j)
-    {
-        int temp = list[i];
-        if( i < j )
-            while(i < j)
-                list[i] = list[++i];
-        else
-            while(i > j)
-                list[i] = list[--i];
-        list[j] = temp;
-    }
-   
     protected long calcularResultado (long [][] grafo, int [] vetorSCV)
     {
         long calculo = 0;
@@ -41,5 +25,4 @@ public class VariableNeighborhood
             calculo += grafo[vetorSCV[i]][vetorSCV[i+1]];
         return calculo;
     }
-
 }
