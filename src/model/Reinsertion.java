@@ -10,13 +10,13 @@ import util.FuncoesVetor;
 public class Reinsertion extends EstruturaVizinhanca 
 {
     @Override
-    public EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] rota, int[] novaRota, int[] melhorRota) 
+    public EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] novaRota, int[] melhorRota) 
     {
         long resultadoInicial = r.getMelhorResultado(), melhorResultado = resultadoInicial;
-        for(int i = 1; i < rota.length-2; i++)
+        for(int i = 1; i < novaRota.length-2; i++)
         {
             long novoResultado = 0;
-            for(int j = 1; j < rota.length-1; j++)
+            for(int j = 1; j < novaRota.length-1; j++)
             {
                 insert(novaRota, i, j);
                 novoResultado = calcularResultado(grafo, novaRota);

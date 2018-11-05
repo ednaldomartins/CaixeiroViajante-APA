@@ -10,14 +10,14 @@ import util.FuncoesVetor;
 public class Swap extends EstruturaVizinhanca
 {
     @Override
-    public EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] rota, int[] novaRota, int[] melhorRota) 
+    public EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] novaRota, int[] melhorRota) 
     {
         long otimoGlobal = r.getMelhorResultado(), otimoLocal = otimoGlobal;
         //buscar todas as possiveis combinacoes em rota atraves de Exchange
-        for(int i = 1; i < rota.length-2; i++)
+        for(int i = 1; i < novaRota.length-2; i++)
         {
             long novoResultado = 0;
-            for(int j = 1; j < rota.length-1; j++)
+            for(int j = 1; j < novaRota.length-1; j++)
             {
                 //a cada interacao faz a troca e calcula o novo resultado obtido
                 exchange(novaRota, i, j);
