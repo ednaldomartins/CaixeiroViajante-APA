@@ -21,13 +21,15 @@ public class VND implements HeuristicaRefinamento
     @Override
     public void refinar(Rota r, long[][] grafo, int[] rota)
     {
-        int [] novaRota = new int[rota.length];
         int [] melhorRota = new int[rota.length];
-        FuncoesVetor.copiarVetor(rota, novaRota);
+        FuncoesVetor.copiarVetor(rota, melhorRota);
         
         ev = new Swap();
         while(ev != null)
-            ev = ev.explorar(r, grafo, rota, novaRota, melhorRota);
+            ev = ev.explorar(r, grafo, rota, melhorRota);
+        FuncoesVetor.copiarVetor(r.getMelhorRota(), rota);
     }
+
+    
     
 }
