@@ -19,15 +19,15 @@ import util.Metaheuristica;
  ******************************************************************************/
 public class ControllerPCV 
 {
-    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv9_177.txt";
+    private final String ARQUIVO_ORIGEM = "..\\CaixeiroViajante\\instancias\\pcv5_15.txt";
     private final long[][] matriz;
-    private Rota rota;          //Objeto Rota guarda varias informacoes sobre rotas
+    private Rota r;          //Objeto Rota guarda varias informacoes sobre rotas
     private int [] vetorSCV;    //primeira solucao
 
     public ControllerPCV() 
     {
         this.matriz = carregarMatrizArquivo();
-        this.rota = new Rota(matriz.length);
+        this.r = new Rota(matriz.length);
     }
     
     public void controlePCV (HeuristicaConstrutiva heuristica, HeuristicaRefinamento refinamento)
@@ -35,15 +35,16 @@ public class ControllerPCV
         vetorSCV = new int[matriz.length+1];
         FuncoesVetor.iniciarVetor(vetorSCV);
         heuristica.solucionarPCV(matriz, vetorSCV);
-        rota.addSolucao(vetorSCV);
-        rota.setNumMelhorRota(0);
-        refinamento.refinar(rota, matriz, vetorSCV);
+        r.setSolucaoInicial(vetorSCV);
+        r.addSolucao(vetorSCV);
+        refinamento.refinar(r, matriz, vetorSCV);
+        r.setSolucaoRefinamento(vetorSCV);
     }
     
     public void controlePCV (HeuristicaConstrutiva heuristica, HeuristicaRefinamento refinamento, Metaheuristica metaheuristica)
     {
         this.controlePCV(heuristica, refinamento);
-        metaheuristica.explorar(rota, matriz, vetorSCV);
+        metaheuristica.explorar(r, matriz, vetorSCV);
     }
     
     //Arquivo
@@ -61,18 +62,32 @@ public class ControllerPCV
         Print.printMatriz(matriz);
     }
     
-    public void printVetorSCV ()
+    public void printVetorInicialSCV ()
     {
-        Print.printVetor(vetorSCV);
+        Print.printVetor(r.getSolucaoInicial(), "SCV inicial");
     }
     
-    public void printResultadoSCV ()
+    public void printResultadoInicialSCV ()
     {
-        Print.printResultado(matriz, vetorSCV);
+        Print.printResultado(matriz, r.getSolucaoInicial(), "SCV inicial");
     }
     
-    public void printMelhorResultado()
+    public void printVetorRefinamentoSCV ()
     {
-        Print.printResultado(matriz, rota.getSolucao( rota.getNumMelhorRota() ));
+        Print.printVetor(r.getSolucaoRefinamento(), "SCV com Refinamento");
+    }
+    
+    public void printResultadoRefinamentoSCV ()
+    {
+        Print.printResultado(matriz, r.getSolucaoRefinamento(), "SCV com Refinamento");
+    }
+    
+    public void printVetorOtimoGlobalSCV ()
+    {
+        Print.printVetor(r.getMelhorSolucao(), "SCV - OtimoGlobal");
+    }
+    public void printOtimoGlobalSCV()
+    {
+        Print.printResultado(matriz, r.getSolucao(r.getNumMelhorRota() ), "SCV - OtimoGlobal");
     }
 }
