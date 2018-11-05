@@ -8,7 +8,7 @@ package model;
 public abstract class EstruturaVizinhanca 
 {
     //STATE
-    public abstract EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] rota, int[] novaRota, int[] melhorRota);
+    public abstract EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] novaRota, int[] melhorRota);
             
     protected void buildMelhorSolucao(Rota r, long [][] grafo, int [] melhorRota, long resultado)
     {
