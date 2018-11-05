@@ -1,6 +1,8 @@
 
 package model;
 
+import util.FuncoesVetor;
+
 /*******************************************************************************
  * @author Ednaldo                                                             *
  *  date: 23.10.2018                                                           *
@@ -17,6 +19,8 @@ public class Rota
     private int melhorRota;         
     private int ultimaSolucao;  
     private long melhorResultado; 
+    private int [] solucaoInicial;
+    private int [] solucaoRefinamento;
     private int [] melhorSolucao;
     private int [][] solucoes;
     
@@ -25,8 +29,10 @@ public class Rota
         this.melhorRota = -1;
         this.ultimaSolucao = -1;
         this.melhorResultado = Long.MAX_VALUE;
+        this.solucaoInicial = new int [numCidades+1];
+        this.solucaoRefinamento = new int [numCidades+1];
         this.melhorSolucao = new int [numCidades+1];
-        this.solucoes = new int [(numCidades)*2][numCidades+1];
+        this.solucoes = new int [(numCidades)*1000][numCidades+1];
     }
 
     public void addSolucao(int [] solucao)
@@ -60,6 +66,14 @@ public class Rota
         return melhorResultado;
     }
 
+    public int[] getSolucaoInicial() {
+        return solucaoInicial;
+    }
+
+    public int[] getSolucaoRefinamento() {
+        return solucaoRefinamento;
+    }
+
     public int[] getMelhorSolucao() {
         return melhorSolucao;
     }
@@ -79,8 +93,16 @@ public class Rota
         this.melhorResultado = resultado;
     }
 
+    public void setSolucaoInicial(int[] solucaoInicial) {
+        FuncoesVetor.copiarVetor( solucaoInicial, this.solucaoInicial);
+    }
+
+    public void setSolucaoRefinamento(int[] solucaoRefinamento) {
+        FuncoesVetor.copiarVetor( solucaoRefinamento, this.solucaoRefinamento);
+    }
+
     public void setMelhorSolucao(int[] melhorSolucao) {
-        this.melhorSolucao = melhorSolucao;
+        FuncoesVetor.copiarVetor( melhorSolucao, this.melhorSolucao);
     }
     
     public void setSolucoes(int[][] solucoes) {
