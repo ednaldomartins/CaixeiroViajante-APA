@@ -17,10 +17,10 @@ public class IteratedLocalSearch implements Metaheuristica
     @Override
     public void explorar(Rota r, long[][] grafo, int[] rota) 
     {
-        long otimoGlobal = r.getMelhorResultado();
+        long melhorSolucao = r.getMelhorResultado();
         long maiorAresta = Long.MIN_VALUE;
         int i, pos = 0, cont = 0;
-        while(cont++ < 200)
+        while(cont++ < 100)
         {
             //pertubacao procurando uma aresta grande e trocando por outra possivel
             for(i = rota.length-1; i > 1; i--)
@@ -32,24 +32,28 @@ public class IteratedLocalSearch implements Metaheuristica
                 }
             }
             
-            //this.nivelPerturbacao = random.nextInt(2)+1;
-            perturbacao(rota, pos-1, random.nextInt(rota.length-3)+1);
-            nivelPerturbacao = (otimoGlobal == r.getMelhorResultado() && nivelPerturbacao < 3) ? nivelPerturbacao++ : nivelPerturbacao;
-            nivelPerturbacao = (otimoGlobal != r.getMelhorResultado() && nivelPerturbacao > 1) ? nivelPerturbacao-- : nivelPerturbacao;
+            perturbacao(rota, pos, rota.length);
+            nivelPerturbacao = (melhorSolucao == r.getMelhorResultado() && nivelPerturbacao < 4) ? nivelPerturbacao+1 : nivelPerturbacao;
+            nivelPerturbacao = (melhorSolucao != r.getMelhorResultado() && nivelPerturbacao > 1) ? nivelPerturbacao-1 : nivelPerturbacao;
             new VND().refinar(r, grafo, rota);
         }
     }
     
-    public void perturbacao (int [] list, int i, int j)
+    public void perturbacao (int [] list, int i, int tamanhoVetor)
     {
         switch(nivelPerturbacao)
         {
             case 1:
-                perturbacao1(list, i, j);
+                perturbacao1(list, i, random.nextInt(tamanhoVetor-3)+1);
+                break;
             case 2:
-                perturbacao2(list, i, j);
+                perturbacao2(list, i, random.nextInt(tamanhoVetor-3)+1);
+                break;
             case 3:
-                perturbacao3(list, i, j);
+                perturbacao3(list, i, random.nextInt(tamanhoVetor-3)+1);
+                break;
+            case 4:
+                perturbacao3(list, random.nextInt(tamanhoVetor-3)+1, random.nextInt(tamanhoVetor-3)+1);
         }
     }
     

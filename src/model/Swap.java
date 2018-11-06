@@ -12,32 +12,32 @@ public class Swap extends EstruturaVizinhanca
     @Override
     public EstruturaVizinhanca explorar(Rota r, long[][] grafo, int[] novaRota, int[] melhorRota) 
     {
-        long otimoGlobal = r.getMelhorResultado(), otimoLocal = otimoGlobal;
+        long resultadoInicial = r.getMelhorResultado(), melhorResultado = resultadoInicial;
         //buscar todas as possiveis combinacoes em rota atraves de Exchange
         for(int i = 1; i < novaRota.length-2; i++)
         {
             long novoResultado = 0;
-            for(int j = 1; j < novaRota.length-1; j++)
+            for(int j = i+1; j < novaRota.length-1; j++)
             {
                 //a cada interacao faz a troca e calcula o novo resultado obtido
                 exchange(novaRota, i, j);
                 novoResultado = calcularResultado(grafo, novaRota);
-                if(i!=j && novoResultado < otimoLocal)
+                if(novoResultado < melhorResultado)
                 {
-                    otimoLocal = novoResultado;
+                    melhorResultado = novoResultado;
                     FuncoesVetor.copiarVetor(novaRota, melhorRota);
                 }
                 exchange(novaRota, i, j);
             }
-            //se encontrou um otimoLocal, guarda-lo
-            if(otimoLocal < r.getMelhorResultado())
+            //se encontrou um melhorResultado, guarda-lo
+            if(melhorResultado < r.getMelhorResultado())
             {
-                buildMelhorSolucao(r, grafo, melhorRota, otimoLocal);
+                buildMelhorSolucao(r, grafo, melhorRota, melhorResultado);
                 FuncoesVetor.copiarVetor(melhorRota, novaRota);
             }
         }
-        //N1: Swap, entao se nao encontrou um otimoLocal ir para o N2.
-        return (otimoLocal >= otimoGlobal) ? new Reinsertion() : this;
+        //N1: Swap, entao se nao encontrou um melhorResultado ir para o N2.
+        return (melhorResultado < resultadoInicial) ? this : new Reinsertion();
     }
     
     private void exchange ( int [] list, int i, int j )
