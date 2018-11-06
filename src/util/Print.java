@@ -34,7 +34,7 @@ public class Print
         {
             System.out.println( "("+(scv[i]+1)+")______" + 
                                 matriz[scv[i]][scv[i+1]] + "______(" + 
-                                (scv[i]+2)+ ")" );
+                                (scv[i+1]+1)+ ")" );
             resultado += matriz[scv[i]][scv[i+1]];
         }
         System.out.println(nome+". Resultado: " + resultado);
